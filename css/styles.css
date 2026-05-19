@@ -1512,6 +1512,21 @@ p {
   position: relative;
 }
 
+.field-desli-bajo {
+  width: 100%;
+  display: flex;
+  grid-column: 2;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.field-desli-bajo .hero__scroll {
+  position: static;
+  bottom: auto;
+  right: auto;
+  transform: translateX(clamp(24px, 4vw, 64px));
+}
+
 .field-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1765,6 +1780,10 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .field-desli-bajo {
+    grid-column: auto;
+  }
+
   .cta-banner__inner {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -1827,6 +1846,10 @@ p {
   }
 
   .hero__scroll { display: none; }
+  .field-desli-bajo .hero__scroll {
+    display: flex;
+    transform: none;
+  }
 
   .wa-fab {
     width: 54px;
