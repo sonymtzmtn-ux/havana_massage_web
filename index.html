@@ -23,6 +23,20 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css?v=20260518" />
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X4RK096B76"></script>
+  <script>
+    window.HM_GA_ID          = 'G-X4RK096B76';
+    window.HM_GA_PROPERTY_ID = '538222076'; // Número de propiedad GA4 (ej: 412345678)
+    window.HM_GA_CLIENT_ID   = '1044866223613-3bpkaoia3d01lkg2utfsgg87bt4beej2.apps.googleusercontent.com';   // OAuth2 Client ID de Google Cloud
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', window.HM_GA_ID, { anonymize_ip: true });
+  </script>
+  <!-- Google Identity Services (panel admin) -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
@@ -406,61 +420,61 @@
           <div class="team__viewport" id="teamViewport">
             <div class="team__track" id="teamTrack">
 
-              <article class="member">
+              <article class="member" data-active="true">
                 <div class="member__photo">
                   <img src="img/team/yamel-hermida.jpg" alt="Yamel Hermida" loading="lazy" />
                 </div>
                 <div class="member__info">
                   <span class="member__num mono">01</span>
-                  <h3 class="member__name">Yamel Hermida</h3>
+                  <h3 class="member__name">Yamel Hermida <span class="member__dot" aria-label="Disponible hoy"></span></h3>
                   <p class="member__meta"><span>40 años</span><span class="sep">·</span><span>Cuba</span></p>
                   <p class="member__bio">Fundador del estudio. Mano firme y conversación tranquila — el ritmo que te pide el cuerpo después de una semana larga.</p>
                 </div>
               </article>
 
-              <article class="member">
+              <article class="member" data-active="false">
                 <div class="member__photo">
                   <img src="img/team/reinier-dias.jpg" alt="Reinier Dias" loading="lazy" />
                 </div>
                 <div class="member__info">
                   <span class="member__num mono">02</span>
-                  <h3 class="member__name">Reinier Dias</h3>
+                  <h3 class="member__name">Reinier Dias <span class="member__dot" aria-label="Disponible hoy"></span></h3>
                   <p class="member__meta"><span>40 años</span><span class="sep">·</span><span>Cuba</span></p>
                   <p class="member__bio">Especialista en descarga muscular. Si el lunes te dejó cargado, pídelo a él.</p>
                 </div>
               </article>
 
-              <article class="member">
+              <article class="member" data-active="true">
                 <div class="member__photo">
                   <img src="img/team/daniel-lopez.jpg" alt="Daniel López" loading="lazy" />
                 </div>
                 <div class="member__info">
                   <span class="member__num mono">03</span>
-                  <h3 class="member__name">Daniel López</h3>
+                  <h3 class="member__name">Daniel López <span class="member__dot" aria-label="Disponible hoy"></span></h3>
                   <p class="member__meta"><span>28 años</span><span class="sep">·</span><span>Venezuela</span></p>
                   <p class="member__bio">Energía joven y técnica cuidada. Sabe leer el cuerpo antes que las palabras.</p>
                 </div>
               </article>
 
-              <article class="member">
+              <article class="member" data-active="false">
                 <div class="member__photo">
                   <img src="img/team/yasmany-monte.jpg" alt="Yasmany Monte" loading="lazy" />
                 </div>
                 <div class="member__info">
                   <span class="member__num mono">04</span>
-                  <h3 class="member__name">Yasmany Monte</h3>
+                  <h3 class="member__name">Yasmany Monte <span class="member__dot" aria-label="Disponible hoy"></span></h3>
                   <p class="member__meta"><span>36 años</span><span class="sep">·</span><span>Cuba</span></p>
                   <p class="member__bio">Ritual sensorial. Lo suyo es el ambiente — luz, aroma, presión justa.</p>
                 </div>
               </article>
 
-              <article class="member">
+              <article class="member" data-active="true">
                 <div class="member__photo">
                   <img src="img/team/julio-guerra.jpg" alt="Julio Guerra" loading="lazy" />
                 </div>
                 <div class="member__info">
                   <span class="member__num mono">05</span>
-                  <h3 class="member__name">Julio Guerra</h3>
+                  <h3 class="member__name">Julio Guerra <span class="member__dot" aria-label="Disponible hoy"></span></h3>
                   <p class="member__meta"><span>30 años</span><span class="sep">·</span><span>Perú</span></p>
                   <p class="member__bio">Cercano de entrada. Te hace sentir en casa antes de que toques la camilla.</p>
                 </div>
@@ -625,6 +639,18 @@
               </li>
             </ul>
 
+            <div class="social-links social-links--contact">
+              <a href="https://www.instagram.com/havana_massage?igsh=MjkydTU4bHk4b2cx" target="_blank" rel="noopener" aria-label="Instagram de Havana Massage">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </a>
+              <a href="https://www.facebook.com/share/1L83YDuJP5/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook de Havana Massage">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+              <a href="https://www.tiktok.com/@havana.massage?_r=1&_t=ZN-96UARGJoPLy" target="_blank" rel="noopener" aria-label="TikTok de Havana Massage">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.57a8.28 8.28 0 0 0 4.84 1.54V6.67a4.85 4.85 0 0 1-1.07.02z"/></svg>
+              </a>
+            </div>
+
             <div class="contact__map">
               <iframe
                 src="https://www.google.com/maps?q=Miraflores,Lima,Peru&output=embed"
@@ -706,6 +732,17 @@
         <div class="footer__brand">
           <span class="logo-circle logo-circle--lg"><img src="img/logo.jpg" alt="Havana Massage" /></span>
           <p>Privado. Cálido. Sin prisas.</p>
+          <div class="social-links">
+            <a href="https://www.instagram.com/havana_massage?igsh=MjkydTU4bHk4b2cx" target="_blank" rel="noopener" aria-label="Instagram de Havana Massage">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://www.facebook.com/share/1L83YDuJP5/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook de Havana Massage">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@havana.massage?_r=1&_t=ZN-96UARGJoPLy" target="_blank" rel="noopener" aria-label="TikTok de Havana Massage">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.57a8.28 8.28 0 0 0 4.84 1.54V6.67a4.85 4.85 0 0 1-1.07.02z"/></svg>
+            </a>
+          </div>
         </div>
         <nav class="footer__nav" aria-label="Pie">
           <h4 class="mono">Sitio</h4>
@@ -734,6 +771,110 @@
   <a href="https://wa.me/51922014182?text=Hola%20Havana%2C%20quiero%20reservar%20una%20cita" target="_blank" rel="noopener" class="wa-fab" aria-label="Reservar por WhatsApp">
     <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413"/></svg>
   </a>
+
+  <!-- ============ ADMIN PANEL ============ -->
+  <div class="admin-panel" id="adminPanel" aria-hidden="true" role="dialog" aria-label="Panel de administración">
+    <div class="admin-panel__card">
+
+      <div class="admin-panel__head">
+        <div class="admin-panel__brand">
+          <span class="logo-circle"><img src="img/logo.jpg" alt="" /></span>
+          <div>
+            <p class="admin-panel__title">Dashboard</p>
+            <p class="mono">Havana Massage</p>
+          </div>
+        </div>
+        <button class="admin-panel__close" id="adminClose" aria-label="Cerrar panel">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="admin-panel__stats">
+        <div class="admin-stat">
+          <span class="admin-stat__value" id="statTotal">—</span>
+          <span class="admin-stat__label mono">Total visitas</span>
+        </div>
+        <div class="admin-stat">
+          <span class="admin-stat__value" id="statToday">—</span>
+          <span class="admin-stat__label mono">Hoy</span>
+        </div>
+        <div class="admin-stat">
+          <span class="admin-stat__value" id="statWeek">—</span>
+          <span class="admin-stat__label mono">Esta semana</span>
+        </div>
+        <div class="admin-stat">
+          <span class="admin-stat__value" id="statMonth">—</span>
+          <span class="admin-stat__label mono">Este mes</span>
+        </div>
+      </div>
+
+      <div class="admin-panel__section">
+        <p class="admin-panel__section-label mono">Últimos 7 días</p>
+        <div class="admin-chart" id="adminChart"></div>
+      </div>
+
+      <div class="admin-panel__section">
+        <p class="admin-panel__section-label mono">Última visita registrada</p>
+        <p class="admin-panel__last" id="statLast">—</p>
+      </div>
+
+      <div class="admin-panel__section admin-panel__ga">
+        <p class="admin-panel__section-label mono">Google Analytics · Tiempo Real</p>
+
+        <!-- Estado 1: faltan configurar Property ID / Client ID -->
+        <div id="gaSetup">
+          <p class="admin-ga__msg">Configura <code>HM_GA_PROPERTY_ID</code> y <code>HM_GA_CLIENT_ID</code> en <code>index.html</code> para activar métricas reales.</p>
+          <p class="admin-ga__hint mono">Ver instrucciones en el README → "Cómo configurar Google Analytics 4"</p>
+        </div>
+
+        <!-- Estado 2: configurado, esperando login -->
+        <div id="gaConnect" hidden>
+          <button class="admin-ga__signin" id="gaSignIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"/></svg>
+            Conectar con Google Analytics
+          </button>
+          <p class="admin-ga__hint mono">Solo lectura · No se modifican tus datos</p>
+        </div>
+
+        <!-- Estado 3: cargando -->
+        <div id="gaLoading" hidden>
+          <div class="ga-loading"><span class="ga-spinner"></span><span class="mono">Cargando métricas…</span></div>
+        </div>
+
+        <!-- Estado 4: métricas activas -->
+        <div id="gaMetrics" hidden>
+          <div class="ga-realtime">
+            <span class="ga-realtime__dot"></span>
+            <span class="ga-realtime__num" id="gaActiveUsers">—</span>
+            <span class="mono">usuarios activos ahora</span>
+          </div>
+          <div class="ga-kpi-grid">
+            <div class="ga-kpi"><span class="ga-kpi__val" id="gaSessionsToday">—</span><span class="ga-kpi__lbl mono">sesiones hoy</span></div>
+            <div class="ga-kpi"><span class="ga-kpi__val" id="gaUsersToday">—</span><span class="ga-kpi__lbl mono">usuarios hoy</span></div>
+            <div class="ga-kpi"><span class="ga-kpi__val" id="gaSessions7d">—</span><span class="ga-kpi__lbl mono">sesiones 7d</span></div>
+            <div class="ga-kpi"><span class="ga-kpi__val" id="gaUsers30d">—</span><span class="ga-kpi__lbl mono">usuarios 30d</span></div>
+          </div>
+          <div class="admin-chart" id="gaChart"></div>
+          <div class="ga-foot">
+            <span class="ga-countdown mono" id="gaCountdown">· · ·</span>
+            <button class="admin-ga__signout" id="gaSignOut">Desconectar</button>
+          </div>
+        </div>
+
+        <!-- Estado 5: error -->
+        <div id="gaError" hidden>
+          <p class="admin-ga__error" id="gaErrorMsg">Error al cargar datos.</p>
+          <button class="admin-ga__retry" id="gaRetry">Reintentar →</button>
+        </div>
+      </div>
+
+      <div class="admin-panel__foot">
+        <span class="mono admin-panel__hint">Ctrl + Shift + H para abrir · <code>?admin</code> en la URL</span>
+        <button class="admin-panel__reset" id="adminReset">Resetear datos</button>
+      </div>
+
+    </div>
+  </div>
 
   <script src="js/main.js?v=20260518" defer></script>
 </body>

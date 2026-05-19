@@ -309,6 +309,364 @@
     });
   }
 
+  // ---------- Admin panel & visit counter ----------
+  function initAdminPanel() {
+    const STORE = 'hm_visits_v1';
+
+    function load() {
+      try { return JSON.parse(localStorage.getItem(STORE)) || { total: 0, sessions: [] }; }
+      catch (e) { return { total: 0, sessions: [] }; }
+    }
+
+    function save(data) {
+      try { localStorage.setItem(STORE, JSON.stringify(data)); } catch (e) {}
+    }
+
+    function recordVisit() {
+      if (sessionStorage.getItem('hm_sess')) return;
+      sessionStorage.setItem('hm_sess', '1');
+      const data = load();
+      data.total = (data.total || 0) + 1;
+      const cutoff = Date.now() - 90 * 86400000;
+      data.sessions = (data.sessions || []).filter(t => t > cutoff);
+      data.sessions.push(Date.now());
+      save(data);
+    }
+
+    function dayStart(offsetDays) {
+      const d = new Date();
+      d.setDate(d.getDate() - offsetDays);
+      d.setHours(0, 0, 0, 0);
+      return d.getTime();
+    }
+
+    function weekStart() {
+      const d = new Date();
+      d.setHours(0, 0, 0, 0);
+      d.setDate(d.getDate() - ((d.getDay() + 6) % 7)); // lunes como primer día
+      return d.getTime();
+    }
+
+    function monthStart() {
+      const d = new Date();
+      d.setDate(1);
+      d.setHours(0, 0, 0, 0);
+      return d.getTime();
+    }
+
+    function count(sessions, from, to) {
+      return sessions.filter(t => t >= from && (to == null || t < to)).length;
+    }
+
+    function buildChart(sessions) {
+      const chart = $('#adminChart');
+      if (!chart) return;
+      chart.innerHTML = '';
+
+      const days = [];
+      for (let i = 6; i >= 0; i--) {
+        const from = dayStart(i);
+        const to = i === 0 ? Date.now() + 1 : dayStart(i - 1);
+        const d = new Date(from);
+        const label = d.toLocaleDateString('es-PE', { weekday: 'short' })
+          .replace('.', '').toUpperCase().slice(0, 2);
+        days.push({ label, val: count(sessions, from, to) });
+      }
+
+      const max = Math.max(...days.map(d => d.val), 1);
+
+      days.forEach(({ label, val }) => {
+        const col = document.createElement('div');
+        col.className = 'admin-chart__col';
+        const pct = Math.max(6, Math.round((val / max) * 100));
+        col.innerHTML =
+          '<span class="admin-chart__val">' + val + '</span>' +
+          '<div class="admin-chart__bar"><div class="admin-chart__fill" style="height:' + pct + '%"></div></div>' +
+          '<span class="admin-chart__day mono">' + label + '</span>';
+        chart.appendChild(col);
+      });
+    }
+
+    function formatDate(ts) {
+      if (!ts) return '—';
+      return new Date(ts).toLocaleString('es-PE', {
+        day: '2-digit', month: 'short', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      });
+    }
+
+    // ── localStorage stats render ────────────────────────────
+    function render() {
+      const data = load();
+      const sessions = data.sessions || [];
+      const fmt = n => n.toLocaleString('es-PE');
+      const set = (id, val) => { const el = $('#' + id); if (el) el.textContent = val; };
+      set('statTotal',  fmt(data.total || 0));
+      set('statToday',  fmt(count(sessions, dayStart(0))));
+      set('statWeek',   fmt(count(sessions, weekStart())));
+      set('statMonth',  fmt(count(sessions, monthStart())));
+      set('statLast',   formatDate(sessions[sessions.length - 1]));
+      buildChart(sessions);
+    }
+
+    // ── GA4 Real-time integration ────────────────────────────
+    const GA_API  = 'https://analyticsdata.googleapis.com/v1beta/properties/';
+    const GA_SCO  = 'https://www.googleapis.com/auth/analytics.readonly';
+    let gaToken   = sessionStorage.getItem('hm_ga_token') || null;
+    let gaTC      = null;   // token client
+    let gaRInt    = null;   // refresh interval
+    let gaCInt    = null;   // countdown interval
+    let gaWired   = false;  // buttons wired flag
+
+    function gaOK() {
+      const pid = window.HM_GA_PROPERTY_ID || '';
+      const cid = window.HM_GA_CLIENT_ID   || '';
+      return pid && pid !== 'PROPERTY_ID' && cid && cid !== 'CLIENT_ID';
+    }
+
+    function gaState(id) {
+      ['gaSetup','gaConnect','gaLoading','gaMetrics','gaError'].forEach(s => {
+        const el = $('#' + s); if (el) el.hidden = s !== id;
+      });
+    }
+
+    function gaFmt(n) { return (parseInt(n, 10) || 0).toLocaleString('es-PE'); }
+
+    async function gaPost(path, body) {
+      const r = await fetch(GA_API + window.HM_GA_PROPERTY_ID + path, {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + gaToken, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+      if (r.status === 401) throw new Error('EXPIRED');
+      if (!r.ok) {
+        let detail = 'ERR_' + r.status;
+        try { const e = await r.json(); if (e.error && e.error.message) detail = e.error.message; } catch(_) {}
+        throw new Error(detail);
+      }
+      return r.json();
+    }
+
+    // Safely extracts a metric value from a no-dimension report row
+    function gaMV(report, idx) {
+      const row = report && report.rows && report.rows[0];
+      return gaFmt((row && row.metricValues && row.metricValues[idx] && row.metricValues[idx].value) || '0');
+    }
+
+    function gaDrawChart(rows) {
+      const chart = $('#gaChart');
+      if (!chart) return;
+      chart.innerHTML = '';
+      if (!rows || !rows.length) return;
+      const vals = rows.map(r => parseInt(r.metricValues[0].value, 10) || 0);
+      const max  = Math.max(...vals, 1);
+      rows.forEach(row => {
+        const ds  = row.dimensionValues[0].value;  // YYYYMMDD
+        const val = parseInt(row.metricValues[0].value, 10) || 0;
+        const d   = new Date(+ds.slice(0,4), +ds.slice(4,6) - 1, +ds.slice(6,8));
+        const lbl = d.toLocaleDateString('es-PE', { weekday: 'short' })
+                     .replace('.','').toUpperCase().slice(0,2);
+        const pct = Math.max(6, Math.round((val / max) * 100));
+        const col = document.createElement('div');
+        col.className = 'admin-chart__col';
+        col.innerHTML =
+          '<span class="admin-chart__val">' + val + '</span>' +
+          '<div class="admin-chart__bar"><div class="admin-chart__fill" style="height:' + pct + '%"></div></div>' +
+          '<span class="admin-chart__day mono">' + lbl + '</span>';
+        chart.appendChild(col);
+      });
+    }
+
+    function gaCountdown() {
+      clearInterval(gaCInt);
+      let s = 30;
+      const el = $('#gaCountdown');
+      if (el) el.textContent = 'Actualiza en 30s';
+      gaCInt = setInterval(() => {
+        s--;
+        if (el) el.textContent = s > 0 ? 'Actualiza en ' + s + 's' : 'Actualizando…';
+        if (s <= 0) clearInterval(gaCInt);
+      }, 1000);
+    }
+
+    async function gaLoad() {
+      if (!gaToken) return;
+      gaState('gaLoading');
+      try {
+        // Todas las peticiones en paralelo para máxima velocidad
+        const [rt, rToday, r7d, r30d, rDaily] = await Promise.all([
+
+          // Usuarios activos ahora mismo (Realtime API)
+          gaPost(':runRealtimeReport', {
+            metrics: [{ name: 'activeUsers' }]
+          }),
+
+          // Hoy: sesiones + usuarios (sin dimensiones → totales)
+          gaPost(':runReport', {
+            dateRanges: [{ startDate: 'today', endDate: 'today' }],
+            metrics: [{ name: 'sessions' }, { name: 'totalUsers' }]
+          }),
+
+          // Últimos 7 días: sesiones + usuarios
+          gaPost(':runReport', {
+            dateRanges: [{ startDate: '6daysAgo', endDate: 'today' }],
+            metrics: [{ name: 'sessions' }, { name: 'totalUsers' }]
+          }),
+
+          // Últimos 30 días: usuarios totales
+          gaPost(':runReport', {
+            dateRanges: [{ startDate: '29daysAgo', endDate: 'today' }],
+            metrics: [{ name: 'totalUsers' }]
+          }),
+
+          // Sesiones por día (últimos 7 días) para el gráfico
+          gaPost(':runReport', {
+            dateRanges: [{ startDate: '6daysAgo', endDate: 'today' }],
+            dimensions: [{ name: 'date' }],
+            metrics:    [{ name: 'sessions' }],
+            orderBys:   [{ dimension: { dimensionName: 'date' }, desc: false }]
+          })
+        ]);
+
+        const live = (rt.rows && rt.rows[0] && rt.rows[0].metricValues[0].value) || '0';
+        const set  = (id, v) => { const e = $('#' + id); if (e) e.textContent = v; };
+
+        set('gaActiveUsers',   live);
+        set('gaSessionsToday', gaMV(rToday, 0));
+        set('gaUsersToday',    gaMV(rToday, 1));
+        set('gaSessions7d',    gaMV(r7d,    0));
+        set('gaUsers30d',      gaMV(r30d,   0));
+        gaDrawChart(rDaily.rows || []);
+        gaState('gaMetrics');
+        gaCountdown();
+
+      } catch (e) {
+        if (e.message === 'EXPIRED') {
+          gaToken = null;
+          sessionStorage.removeItem('hm_ga_token');
+          gaState('gaConnect');
+        } else {
+          const msg = $('#gaErrorMsg');
+          if (msg) msg.textContent = e.message;
+          gaState('gaError');
+        }
+      }
+    }
+
+    function gaInitTC() {
+      if (!window.google || !window.google.accounts || gaTC) return;
+      const cid = window.HM_GA_CLIENT_ID;
+      if (!cid || cid === 'CLIENT_ID') return;
+      gaTC = window.google.accounts.oauth2.initTokenClient({
+        client_id: cid,
+        scope: GA_SCO,
+        callback(resp) {
+          if (resp.access_token) {
+            gaToken = resp.access_token;
+            sessionStorage.setItem('hm_ga_token', gaToken);
+            gaLoad();
+            clearInterval(gaRInt);
+            gaRInt = setInterval(() => { if (gaToken) gaLoad(); }, 30000);
+          }
+        }
+      });
+    }
+
+    function gaWireButtons() {
+      if (gaWired) return;
+      gaWired = true;
+
+      const signIn = $('#gaSignIn');
+      if (signIn) signIn.addEventListener('click', () => {
+        if (gaTC) { gaTC.requestAccessToken(); return; }
+        // GIS aún cargando — esperar y reintentar
+        let tries = 0;
+        const poll = setInterval(() => {
+          tries++;
+          gaInitTC();
+          if (gaTC) { clearInterval(poll); gaTC.requestAccessToken(); }
+          if (tries > 30) clearInterval(poll);
+        }, 200);
+      });
+
+      const signOut = $('#gaSignOut');
+      if (signOut) signOut.addEventListener('click', () => {
+        gaToken = null;
+        sessionStorage.removeItem('hm_ga_token');
+        clearInterval(gaRInt);
+        clearInterval(gaCInt);
+        gaState('gaConnect');
+      });
+
+      const retry = $('#gaRetry');
+      if (retry) retry.addEventListener('click', () => gaLoad());
+    }
+
+    function gaSetupUI() {
+      if (!gaOK()) { gaState('gaSetup'); return; }
+      gaInitTC();
+      if (!gaTC && window.google) gaInitTC();
+      gaWireButtons();
+      if (gaToken) {
+        gaLoad();
+        clearInterval(gaRInt);
+        gaRInt = setInterval(() => { if (gaToken) gaLoad(); }, 30000);
+      } else {
+        gaState('gaConnect');
+      }
+    }
+    // ─────────────────────────────────────────────────────────
+
+    function openPanel() {
+      const panel = $('#adminPanel');
+      if (!panel) return;
+      render();
+      gaSetupUI();
+      panel.classList.add('is-open');
+      panel.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePanel() {
+      const panel = $('#adminPanel');
+      if (!panel) return;
+      clearInterval(gaRInt);
+      clearInterval(gaCInt);
+      panel.classList.remove('is-open');
+      panel.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    recordVisit();
+
+    if (new URLSearchParams(location.search).has('admin')) {
+      openPanel();
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.ctrlKey && e.shiftKey && e.key.toUpperCase() === 'H') {
+        const panel = $('#adminPanel');
+        if (panel && panel.classList.contains('is-open')) closePanel(); else openPanel();
+      }
+      if (e.key === 'Escape') {
+        const panel = $('#adminPanel');
+        if (panel && panel.classList.contains('is-open')) closePanel();
+      }
+    });
+
+    $('#adminClose') && $('#adminClose').addEventListener('click', closePanel);
+    $('#adminPanel') && $('#adminPanel').addEventListener('click', e => {
+      if (e.target.id === 'adminPanel') closePanel();
+    });
+    $('#adminReset') && $('#adminReset').addEventListener('click', () => {
+      if (confirm('¿Seguro que quieres borrar todos los datos de visitas? Esta acción no se puede deshacer.')) {
+        localStorage.removeItem(STORE);
+        sessionStorage.removeItem('hm_sess');
+        render();
+      }
+    });
+  }
+
   // ---------- Marquee duplicate (ensure seamless loop) ----------
   function initMarquee() {
     const track = $('.marquee__track');
@@ -353,6 +711,7 @@
     safe(initMarquee, 'marquee');
     safe(initSplashSafety, 'splash-safety');
     safe(initSmoothScroll, 'smooth-scroll');
+    safe(initAdminPanel, 'admin-panel');
   }
 
   if (document.readyState === 'loading') {

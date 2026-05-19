@@ -139,7 +139,43 @@ Borra el `<article class="member">...</article>` completo correspondiente. El ca
 
 ---
 
-### 🏛 2. Cambiar / Agregar imágenes de la galería
+### 🟢 2. Marcar qué masajistas están activos hoy
+
+Cada card de masajista tiene un atributo `data-active` que controla si aparece o no el punto verde luminoso junto a su nombre. Cuando está activo, el punto verde pulsa suavemente para indicar disponibilidad.
+
+#### Cómo activar o desactivar un masajista:
+
+1. Abre `index.html` con tu editor de texto.
+2. Busca la sección `<!-- ============ EQUIPO / MASAJISTAS ============ -->`.
+3. Cada masajista tiene esta forma:
+
+   ```html
+   <article class="member" data-active="true">
+   ```
+
+4. Cambia el valor de `data-active`:
+   - **`data-active="true"`** → aparece el punto verde (masajista disponible hoy).
+   - **`data-active="false"`** → sin punto (masajista no disponible hoy).
+
+#### Ejemplo — Reinier disponible hoy:
+
+**Antes:**
+```html
+<article class="member" data-active="false">
+```
+
+**Después:**
+```html
+<article class="member" data-active="true">
+```
+
+5. Guarda `index.html` y súbelo por FTP. El cambio se ve de inmediato en el sitio.
+
+> **Tip**: haz este cambio cada mañana según quién trabaja ese día. Solo toma 30 segundos editar el archivo y volverlo a subir.
+
+---
+
+### 🏛 3. Cambiar / Agregar imágenes de la galería
 
 **Las imágenes están en:** `img/ambient/`
 
@@ -174,7 +210,7 @@ Borra el `<article class="member">...</article>` completo correspondiente. El ca
 
 ---
 
-### 💆 3. Modificar o agregar servicios
+### 💆 4. Modificar o agregar servicios
 
 **Todos los servicios están en `index.html`** dentro de `<!-- ============ SERVICIOS ============ -->`.
 
@@ -230,6 +266,114 @@ Esto le pone un borde dorado superior y un fondo con resplandor.
 #### Para los servicios adicionales (Exfoliación, Depilación, Baño de Espuma):
 
 Busca `<ul class="extras__list">` y edita / agrega `<li>` siguiendo la misma estructura.
+
+---
+
+## 📊 Panel de administración y visitas
+
+El sitio incluye un **panel de administración** con contador de visitas y gráfico de los últimos 7 días.
+
+### Cómo abrir el panel
+
+| Método | Instrucción |
+|---|---|
+| Teclado | Presiona `Ctrl + Shift + H` en cualquier momento |
+| URL | Agrega `?admin` al final de la URL del sitio |
+| Cerrar | Tecla `Esc`, clic fuera del panel, o el botón `×` |
+
+### Qué muestra el panel
+
+- **Total visitas · Hoy · Esta semana · Este mes** — conteo automático por sesión de navegador
+- **Gráfico de barras** — visitas de los últimos 7 días
+- **Última visita** — fecha y hora exacta
+- **Estado de Google Analytics** — verde si está configurado, dorado si falta configurarlo
+- **Botón "Resetear datos"** — borra el historial (pide confirmación)
+
+> El contador local registra visitas del navegador actual. Para ver **todas las visitas desde cualquier dispositivo**, configura Google Analytics (sección siguiente).
+
+---
+
+## 📈 Cómo configurar Google Analytics 4
+
+Google Analytics es gratis y te permite ver cuántas personas visitan el sitio, desde dónde, cuánto tiempo se quedan y más. El sitio ya tiene el código listo — solo necesitas tu ID personal.
+
+### Paso 1 — Crear una cuenta en Google Analytics
+
+1. Ve a **[analytics.google.com](https://analytics.google.com)** (entra con tu cuenta de Google).
+2. Haz clic en **"Empezar a medir"**.
+3. En **Nombre de la cuenta** escribe: `Havana Massage`.
+4. Clic en **Siguiente**.
+
+### Paso 2 — Crear una propiedad
+
+1. En **Nombre de la propiedad** escribe: `Havana Massage Web`.
+2. Elige zona horaria: **Perú (GMT-5)** y moneda: **Soles peruanos (PEN)**.
+3. Clic en **Siguiente** → completa los datos del negocio → **Crear**.
+4. Acepta las condiciones de servicio.
+
+### Paso 3 — Obtener tu Measurement ID
+
+1. Después de crear la propiedad, aparecerá la pantalla **"Configurar una fuente de datos"**.
+2. Elige **Web**.
+3. En URL escribe la dirección de tu sitio (ej. `havana-massage.com`).
+4. En **Nombre de la secuencia** escribe: `Sitio web principal`.
+5. Clic en **Crear secuencia**.
+6. Aparecerá tu **ID de medición** — tiene este formato: **`G-XXXXXXXXXX`** (empieza con `G-` seguido de letras y números).
+7. **Copia ese ID**.
+
+### Paso 4 — Obtener el Property ID de GA4
+
+1. En [analytics.google.com](https://analytics.google.com), ve a **Administrar** (ícono de engranaje, abajo izquierda).
+2. En la columna **Propiedad**, haz clic en **Configuración de propiedad**.
+3. Verás el **ID de propiedad** — es un número como `412345678`. Cópialo.
+
+### Paso 5 — Crear un OAuth2 Client ID en Google Cloud
+
+Esto permite que el panel de admin lea tus datos de Analytics sin exponer contraseñas.
+
+1. Ve a [console.cloud.google.com](https://console.cloud.google.com) (misma cuenta de Google).
+2. Crea un proyecto nuevo → ponle nombre: `Havana Massage Admin`.
+3. En el menú lateral: **APIs y servicios** → **Biblioteca**.
+4. Busca **"Google Analytics Data API"** → haz clic → **Habilitar**.
+5. Ve a **APIs y servicios** → **Credenciales** → **Crear credenciales** → **ID de cliente de OAuth 2.0**.
+6. Si pide configurar la pantalla de consentimiento: elige **Externo** → completa nombre de app (`Havana Admin`) y correo. En **Usuarios de prueba**, añade tu correo de Google.
+7. Tipo de aplicación: **Aplicación web**.
+8. En **Orígenes de JavaScript autorizados**, agrega la URL de tu sitio (ej: `https://tu-dominio.com`). Si también quieres probarlo en local: agrega `http://localhost`.
+9. Clic en **Crear** → copia el **ID de cliente** (formato: `123456789-xxxx.apps.googleusercontent.com`).
+
+### Paso 6 — Pegar los tres valores en el sitio
+
+1. Abre `index.html` con tu editor de texto.
+2. Busca este bloque (en el `<head>`):
+
+   ```html
+   window.HM_GA_ID          = 'G-X4RK096B76';
+   window.HM_GA_PROPERTY_ID = 'PROPERTY_ID';
+   window.HM_GA_CLIENT_ID   = 'CLIENT_ID';
+   ```
+
+3. Reemplaza `PROPERTY_ID` por el número de propiedad (ej: `412345678`) y `CLIENT_ID` por el OAuth Client ID:
+
+   ```html
+   window.HM_GA_ID          = 'G-X4RK096B76';
+   window.HM_GA_PROPERTY_ID = '412345678';
+   window.HM_GA_CLIENT_ID   = '123456789-xxxx.apps.googleusercontent.com';
+   ```
+
+4. Guarda y sube `index.html` por FTP.
+
+### Paso 7 — Usar el panel en tiempo real
+
+1. Abre el sitio → presiona `Ctrl + Shift + H`.
+2. En la sección **Google Analytics · Tiempo Real**, aparecerá el botón **"Conectar con Google Analytics"**.
+3. Haz clic → se abre un popup de Google pidiendo permiso de solo lectura → acepta.
+4. El panel mostrará inmediatamente:
+   - **Usuarios activos ahora** (punto verde pulsante)
+   - Sesiones y usuarios de **hoy**, **7 días** y **30 días**
+   - **Gráfico** de sesiones por día (últimos 7 días)
+5. Los datos se actualizan automáticamente **cada 30 segundos**.
+
+> La sesión de Google dura hasta que cierres el navegador o hagas clic en "Desconectar". La próxima vez que abras el panel solo necesitarás reconectar una vez.
 
 ---
 
