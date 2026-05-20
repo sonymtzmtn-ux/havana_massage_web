@@ -1,0 +1,464 @@
+/* ============================================================
+   HAVANA MASSAGE · PROMOS PAGE
+   Styles exclusive to promos.html
+   ============================================================ */
+
+/* ── Nav active link ─────────────────────────────────────── */
+.nav__link--active {
+  color: var(--gold) !important;
+  position: relative;
+}
+
+.nav__link--active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.55;
+}
+
+/* ── Promo dot (live eyebrow) ────────────────────────────── */
+.promo-eyebrow-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.promo-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3ddc84;
+  box-shadow: 0 0 0 0 rgba(61, 220, 132, 0.6);
+  animation: promoDotPulse 2.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes promoDotPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(61, 220, 132, 0.6); }
+  60%  { box-shadow: 0 0 0 7px rgba(61, 220, 132, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(61, 220, 132, 0); }
+}
+
+/* ── Hero ────────────────────────────────────────────────── */
+.promos-hero {
+  padding: clamp(120px, 16vw, 180px) 0 clamp(60px, 8vw, 96px);
+  background: var(--black);
+  position: relative;
+  border-bottom: 1px solid var(--line);
+}
+
+.promos-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(242, 181, 68, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.promos-hero__inner {
+  max-width: 720px;
+}
+
+.promos-hero__title {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--cream);
+  margin: 0.55em 0 0.45em;
+  letter-spacing: -0.02em;
+}
+
+.promos-hero__title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.promos-hero__lede {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: rgba(244, 234, 220, 0.7);
+  max-width: 580px;
+  line-height: 1.65;
+  margin-bottom: 2.2rem;
+}
+
+.promos-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2.4rem;
+}
+
+.promos-hero__meta > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--line);
+  min-width: 120px;
+}
+
+.promos-hero__meta .mono {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+
+.promos-hero__meta span:last-child {
+  font-size: 0.9rem;
+  color: var(--cream-2);
+}
+
+/* ── Promos page section ─────────────────────────────────── */
+.promos-page {
+  padding: clamp(60px, 10vw, 120px) 0;
+  background: var(--black);
+}
+
+.promos-page__divider {
+  height: 1px;
+  background: var(--line);
+  margin: clamp(56px, 8vw, 96px) 0;
+}
+
+/* ── Promo full card ─────────────────────────────────────── */
+.promo-full {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 0 clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+
+.promo-full--featured {
+  position: relative;
+}
+
+.promo-full--featured::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--amber), transparent);
+  border-radius: 2px;
+}
+
+/* Aside ── pricing column */
+.promo-full__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  position: sticky;
+  top: 100px;
+  padding: 1.6rem 1.4rem;
+  background: var(--brown-dark);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.promo-full__num {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(242, 181, 68, 0.45);
+}
+
+.promo-full__badge {
+  display: inline-block;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--gold);
+  padding: 4px 9px;
+  border-radius: 2px;
+  align-self: flex-start;
+}
+
+.promo-full__pricing {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.promo-full__original {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: rgba(244, 234, 220, 0.35);
+  text-decoration: line-through;
+}
+
+.promo-full__price {
+  font-family: var(--serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.promo-full__save {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #3ddc84;
+  margin-top: 2px;
+}
+
+.promo-full__validity {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.promo-full__validity .mono {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(244, 234, 220, 0.4);
+}
+
+.promo-full__validity span:last-child {
+  font-size: 0.82rem;
+  color: rgba(244, 234, 220, 0.65);
+}
+
+.promo-full__btn {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  padding: 0.75rem 1rem;
+}
+
+/* Content column */
+.promo-full__content {
+  padding-top: 0.25rem;
+}
+
+.promo-full__tag {
+  display: block;
+  font-size: 0.62rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(242, 181, 68, 0.5);
+  margin-bottom: 0.6rem;
+}
+
+.promo-full__name {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.8rem;
+}
+
+.promo-full__lede {
+  font-size: 1rem;
+  color: rgba(244, 234, 220, 0.72);
+  line-height: 1.68;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+/* Sections within content */
+.promo-full__section {
+  margin-bottom: 1.8rem;
+}
+
+.promo-full__section-title {
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(242, 181, 68, 0.6);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.promo-full__section > p {
+  font-size: 0.93rem;
+  color: rgba(244, 234, 220, 0.65);
+  line-height: 1.65;
+}
+
+/* Includes list */
+.promo-full__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.promo-full__list li {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 0 1.1rem;
+  align-items: start;
+}
+
+.promo-full__item-time {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--gold-soft);
+  background: rgba(242, 181, 68, 0.07);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 4px 6px;
+  text-align: center;
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+.promo-full__list li > div strong {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--cream);
+  margin-bottom: 3px;
+}
+
+.promo-full__list li > div p {
+  font-size: 0.85rem;
+  color: rgba(244, 234, 220, 0.55);
+  line-height: 1.6;
+}
+
+/* Conditions list */
+.promo-full__conditions {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.promo-full__conditions li {
+  font-size: 0.83rem;
+  color: rgba(244, 234, 220, 0.5);
+  line-height: 1.55;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.promo-full__conditions li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: rgba(242, 181, 68, 0.3);
+  font-size: 0.75rem;
+}
+
+/* ── Back / CTA section ──────────────────────────────────── */
+.promos-back {
+  background: var(--brown-dark);
+  border-top: 1px solid var(--line);
+  padding: clamp(60px, 10vw, 100px) 0;
+}
+
+.promos-back__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.4rem;
+  flex-wrap: wrap;
+}
+
+.promos-back__label {
+  font-size: 0.68rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(242, 181, 68, 0.5);
+  margin-bottom: 0.6rem;
+}
+
+.promos-back__inner .h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.promos-back__inner .h2 em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.promos-back__ctas {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .promo-full {
+    grid-template-columns: 1fr;
+  }
+
+  .promo-full__aside {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .promo-full__pricing {
+    border: none;
+    padding: 0;
+  }
+
+  .promo-full__btn {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 600px) {
+  .promos-hero__meta {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .promos-hero__meta > div {
+    border-top: 1px solid var(--line);
+    border-bottom: none;
+    padding: 0.7rem 0;
+  }
+
+  .promo-full__aside {
+    grid-template-columns: 1fr;
+  }
+
+  .promos-back__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .promos-back__ctas {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .promos-back__ctas .btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}

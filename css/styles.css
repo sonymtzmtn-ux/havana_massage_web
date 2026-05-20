@@ -1058,6 +1058,223 @@ p {
   text-align: right;
 }
 
+/* ============ PROMOS DEL MES ============ */
+.promos {
+  padding: clamp(80px, 12vw, 160px) 0;
+  background: var(--black);
+  position: relative;
+  overflow: hidden;
+}
+
+.promos::before {
+  content: '';
+  position: absolute;
+  bottom: -160px;
+  right: -160px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(242, 181, 68, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.promo-eyebrow-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.promo-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  animation: dotActive 2s ease-in-out infinite;
+}
+
+.promos__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.promo {
+  background: var(--brown-dark);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s var(--ease);
+  position: relative;
+}
+
+.promo:hover {
+  border-color: var(--line);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.promo--featured {
+  background: linear-gradient(160deg, rgba(42, 26, 18, 0.9) 0%, var(--brown-dark) 100%);
+}
+
+.promo--featured::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.promo__badge {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: var(--gold);
+  color: var(--black);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 100px;
+}
+
+.promo__label {
+  padding: 22px 28px 0;
+  color: var(--gold);
+  font-size: 0.62rem;
+}
+
+.promo__body {
+  padding: 14px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.promo__name {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--cream);
+  line-height: 1.1;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.promo__desc {
+  font-size: 0.92rem;
+  color: rgba(244, 234, 220, 0.6);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.promo__pricing {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 18px 0;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
+  margin-bottom: 20px;
+}
+
+.promo__original {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: rgba(244, 234, 220, 0.3);
+  text-decoration: line-through;
+}
+
+.promo__arrow {
+  color: var(--gold-soft);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.promo__price {
+  font-family: var(--serif);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.promo__save {
+  font-size: 0.62rem;
+  color: #22c55e;
+  letter-spacing: 0.08em;
+  background: rgba(34, 197, 94, 0.1);
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+
+.promo__includes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 24px;
+  flex: 1;
+}
+
+.promo__includes li {
+  font-size: 0.88rem;
+  color: rgba(244, 234, 220, 0.7);
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.4;
+}
+
+.promo__includes li::before {
+  content: '·';
+  position: absolute;
+  left: 5px;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.promo__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line-soft);
+  flex-wrap: wrap;
+}
+
+.promo__valid {
+  font-size: 0.6rem;
+  color: rgba(244, 234, 220, 0.38);
+  flex: 1;
+  min-width: 100px;
+  line-height: 1.5;
+}
+
+.promo__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--gold);
+  white-space: nowrap;
+  transition: all 0.3s;
+  border-bottom: 1px solid rgba(242, 181, 68, 0.3);
+  padding-bottom: 1px;
+}
+
+.promo__cta span { display: inline-block; transition: transform 0.35s var(--ease); }
+.promo__cta:hover { color: var(--cream); border-color: var(--cream); }
+.promo__cta:hover span { transform: translateX(5px); }
+
+.promos__more { text-align: center; }
+
 /* ============ TEAM ============ */
 .team {
   padding: clamp(80px, 12vw, 160px) 0;
@@ -1875,6 +2092,7 @@ p {
   .value { border-right: 0 !important; border-bottom: 1px solid var(--line-soft); }
   .value:last-child { border-bottom: 0; }
 
+  .promos__grid { grid-template-columns: 1fr; }
   .services__grid { grid-template-columns: 1fr; }
   .extras__list li {
     grid-template-columns: 1fr auto;
