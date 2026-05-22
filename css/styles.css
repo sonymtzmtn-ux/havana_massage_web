@@ -870,6 +870,13 @@ p {
   display: none;
 }
 
+.services__catalog-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
 .service {
   background: var(--black);
   padding: 36px 32px 32px;
