@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<script>
+// Define dataLayer and the gtag function.
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+// IMPORTANT - DO NOT COPY/PASTE WITHOUT MODIFYING REGION LIST
+// Set default consent for specific regions according to your requirements
+gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'analytics_storage': 'denied',
+});
+
+// Set default consent for all other regions according to your requirements
+
+gtag('consent', 'default', {
+  'ad_storage': 'denied',
+  'ad_user_data': 'denied',
+  'ad_personalization': 'denied',
+  'analytics_storage': 'denied'
+});
+ 
+</script>
+
+<!--Banner script here!--> 
+
   <!-- Start cookieyes banner -->
 	<script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/4bbb2d34642a77f0634918234a4dd7ac/script.js"></script>
 	<!-- End cookieyes banner -->
