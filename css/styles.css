@@ -516,8 +516,10 @@ p {
 .hero__image {
   position: absolute;
   inset: -10%;
-  background-size: cover;
-  background-position: center;
+  width: 110%;
+  height: 110%;
+  object-fit: cover;
+  object-position: center;
   filter: brightness(0.45) saturate(1.15);
   animation: heroZoom 24s ease-in-out infinite alternate;
 }
