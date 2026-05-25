@@ -301,7 +301,7 @@ Google Analytics es gratis y te permite ver cuántas personas visitan el sitio, 
 
 1. Ve a **[analytics.google.com](https://analytics.google.com)** (entra con tu cuenta de Google).
 2. Haz clic en **"Empezar a medir"**.
-3. En **Nombre de la cuenta** escribe: `Havana Massage`.
+3. En **Nombre de la cuenta** escribe: `CTA_sony_admin`.
 4. Clic en **Siguiente**.
 
 ### Paso 2 — Crear una propiedad
