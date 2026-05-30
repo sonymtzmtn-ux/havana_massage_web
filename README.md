@@ -212,46 +212,54 @@ Cada card de masajista tiene un atributo `data-active` que controla si aparece o
 
 ### 💆 4. Modificar o agregar servicios
 
-**Todos los servicios están en `index.html`** dentro de `<!-- ============ SERVICIOS ============ -->`.
+Los servicios aparecen en **dos lugares** que debes mantener sincronizados:
 
-Cada servicio es un bloque `<article class="service">`. Hay dos paneles: Essential y Premium, separados por `data-pane="essential"` y `data-pane="premium"`.
+- **`index.html`** → sección `<!-- ============ SERVICIOS ============ -->` (las tarjetas de la home).
+- **`catalogo.html`** → el catálogo tipo libro, donde cada servicio es una `<section class="slide">`.
 
-#### Para modificar precio, duración o descripción:
+> ℹ️ Ya **no** hay paneles Essential / Premium. Ahora es una sola lista de **5 experiencias** (paquetes con precio único).
 
-1. Encuentra el `<article class="service">` del servicio que quieres editar (busca por nombre, ej. "Jardín de Paz").
+#### Servicios actuales
+
+| Servicio | Precio | Duración |
+|---|---|---|
+| Ruta Habanera ★ | S/. 200 | 85–90 min |
+| Cuba Relax | S/. 170 | 50 min |
+| Renacer Habanero | S/. 135 | ritual de 3 fases |
+| Pausa Profunda | S/. 120 | 45 min |
+| Jardín de Paz | S/. 100 | 45 min |
+
+#### Para modificar precio, duración o descripción (en `index.html`):
+
+1. Encuentra el `<article class="service">` del servicio que quieres editar (busca por nombre, ej. "Cuba Relax").
 2. Edita los campos:
 
    ```html
    <article class="service">
      <header class="service__head">
-       <span class="service__tag mono">Essential</span>     <!-- categoría -->
-       <span class="service__price">S/. 100</span>          <!-- ← precio -->
+       <span class="service__tag mono">Ritual sensorial</span>   <!-- ← categoría -->
+       <span class="service__price">S/. 170</span>               <!-- ← precio -->
      </header>
-     <h3 class="service__name">Jardín de Paz</h3>           <!-- ← nombre -->
-     <p class="service__desc">                              <!-- ← descripción -->
-       Masaje relajante con crema o aceite tibio...
-     </p>
+     <h3 class="service__name">Cuba Relax</h3>                    <!-- ← nombre -->
+     <p class="service__desc">Un ritual para desconectarte...</p> <!-- ← intro -->
+     <ul class="service__includes">                              <!-- ← lo que incluye -->
+       <li><span class="mono">25 min</span> Exfoliación corporal</li>
+       <li>Toallas calientes</li>
+     </ul>
      <div class="service__meta">
-       <span>... 60 min</span>                              <!-- ← duración -->
+       <span>... 50 min</span>                                   <!-- ← duración -->
      </div>
+     <p class="service__quote">“Tu cuerpo descansa…”</p>         <!-- ← frase final -->
      <a class="service__cta" href="https://wa.me/51922014182?text=...">
        Reservar <span>→</span>
      </a>
    </article>
    ```
 
-3. **Importante**: si cambias el nombre, también cambia el texto en el link de WhatsApp (`?text=...`) para que el mensaje pre-llenado coincida.
-4. Si modificas el precio, **actualiza también el `<option>` en el formulario de contacto** (busca `<select id="service"`).
-
-#### Para agregar un servicio nuevo:
-
-1. Copia un bloque `<article class="service">` completo y pégalo dentro del panel correspondiente (`data-pane="essential"` o `data-pane="premium"`).
-2. Edita todos los campos.
-3. Agrega también una nueva opción en el formulario de contacto:
-
-   ```html
-   <option value="Nombre del servicio">Nombre · S/. precio</option>
-   ```
+3. **Importante**: si cambias el nombre, también cambia el texto del link de WhatsApp (`?text=...`) para que el mensaje pre-llenado coincida.
+4. Si modificas el precio o el nombre, **actualiza también**:
+   - El `<option>` en el formulario de contacto (busca `<select id="service"` en `index.html`).
+   - La `<section class="slide">` equivalente en **`catalogo.html`** (precio en `.price-amount`, descripción en `.slide-desc`, detalles en `.premium-include-text` y frase en `.slide-quote`).
 
 #### Para agregar un servicio destacado:
 
@@ -263,9 +271,19 @@ Agrega la clase `service--feature` al `<article>`:
 
 Esto le pone un borde dorado superior y un fondo con resplandor.
 
+#### Para agregar o quitar servicios:
+
+1. Copia/elimina un bloque `<article class="service">` completo en `index.html` y su `<section class="slide">` en `catalogo.html`.
+2. Si **cambia la cantidad** de servicios, en `catalogo.html` actualiza la numeración de los slides (`<div class="slide-index">0X / 08</div>`) y el contador inferior (`<span>/ 08</span>`). El número total = portada (1) + servicios + adicionales (1) + CTA (1).
+3. Agrega también la opción en el formulario de contacto:
+
+   ```html
+   <option value="Nombre del servicio">Nombre · S/. precio</option>
+   ```
+
 #### Para los servicios adicionales (Exfoliación, Depilación, Baño de Espuma):
 
-Busca `<ul class="extras__list">` y edita / agrega `<li>` siguiendo la misma estructura.
+Busca `<ul class="extras__list">` en `index.html` (o `<div class="extras-list">` en `catalogo.html`) y edita / agrega los items siguiendo la misma estructura.
 
 ---
 

@@ -945,8 +945,54 @@ p {
   font-size: 0.92rem;
   color: rgba(244, 234, 220, 0.6);
   margin-bottom: 20px;
-  flex: 1;
   line-height: 1.55;
+}
+
+.service__includes {
+  list-style: none;
+  margin: 0 0 22px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  flex: 1;
+}
+
+.service__includes li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.86rem;
+  line-height: 1.4;
+  color: rgba(244, 234, 220, 0.72);
+}
+
+.service__includes li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.7;
+}
+
+.service__includes li .mono {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--gold-soft);
+  margin-right: 7px;
+}
+
+.service__quote {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.98rem;
+  line-height: 1.4;
+  color: rgba(242, 181, 68, 0.85);
+  margin: 0 0 24px;
 }
 
 .service__meta {
