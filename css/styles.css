@@ -244,6 +244,127 @@ p {
   90%, 100% { opacity: 0; pointer-events: none; visibility: hidden; }
 }
 
+/* Fiestas Patrias en el splash */
+.splash__fiestas {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 22px;
+  opacity: 0;
+  animation: splashFiestasIn 1s 1.2s var(--ease) forwards;
+}
+
+.splash__fiestas .mono {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #f5d7db 0%, #ffffff 45%, #ff6b81 50%, #ffffff 55%, #f5d7db 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fiestasShine 3.5s linear infinite;
+}
+
+.splash__fiestas-flag {
+  font-size: 1.05rem;
+  line-height: 1;
+  transform-origin: bottom left;
+  animation: fiestasWave 1.8s ease-in-out infinite;
+}
+
+.splash__fiestas-flag--mirror {
+  transform-origin: bottom right;
+  animation-delay: 0.9s;
+}
+
+@keyframes splashFiestasIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Confeti rojo y blanco cayendo en el splash */
+.splash__confetti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.splash__confetti i {
+  position: absolute;
+  top: -4vh;
+  width: 7px;
+  height: 11px;
+  border-radius: 1.5px;
+  opacity: 0;
+  animation: splashConfettiFall 3.4s linear infinite;
+}
+
+.splash__confetti i:nth-child(odd)  { background: #d90429; }
+.splash__confetti i:nth-child(even) { background: #ffffff; }
+
+.splash__confetti i:nth-child(1)  { left: 2%;  animation-delay: 0.2s; }
+.splash__confetti i:nth-child(2)  { left: 5%;  animation-delay: 1.4s; width: 5px; height: 8px; }
+.splash__confetti i:nth-child(3)  { left: 9%;  animation-delay: 0.7s; }
+.splash__confetti i:nth-child(4)  { left: 12%; animation-delay: 2.1s; width: 5px; height: 8px; }
+.splash__confetti i:nth-child(5)  { left: 16%; animation-delay: 1.0s; }
+.splash__confetti i:nth-child(6)  { left: 19%; animation-delay: 0.4s; width: 5px; height: 8px; }
+.splash__confetti i:nth-child(7)  { left: 23%; animation-delay: 1.8s; }
+.splash__confetti i:nth-child(8)  { left: 26%; animation-delay: 0.9s; width: 5px; height: 8px; }
+.splash__confetti i:nth-child(9)  { left: 30%; animation-delay: 2.4s; }
+.splash__confetti i:nth-child(10) { left: 33%; animation-delay: 0.1s; width: 5px; height: 8px; }
+.splash__confetti i:nth-child(11) { left: 37%; animation-delay: 1.6s; }
+.splash__confetti i:nth-child(12) { left: 40%; animation-delay: 0.6s; width: 5px; height: 8px; }
+.splash__confetti i:nth-child(13) { left: 44%; animation-delay: 2.0s; }
+.splash__confetti i:nth-child(14) { left: 47%; animation-delay: 0.3s; width: 5px; height: 8px; }
+.splash__confetti i:nth-child(15) { left: 51%; animation-delay: 1.2s; }
+.splash__confetti i:nth-child(16) { left: 54%; animation-delay: 2.6s; width: 5px; height: 8px; }
+.splash__confetti i:nth-child(17) { left: 58%; animation-delay: 0.8s; }
+.splash__confetti i:nth-child(18) { left: 61%; animation-delay: 1.9s; width: 5px; height: 8px; }
+.splash__confetti i:nth-child(19) { left: 65%; animation-delay: 0.5s; }
+.splash__confetti i:nth-child(20) { left: 68%; animation-delay: 2.3s; width: 5px; height: 8px; }
+.splash__confetti i:nth-child(21) { left: 72%; animation-delay: 1.1s; }
+.splash__confetti i:nth-child(22) { left: 75%; animation-delay: 0.0s; width: 5px; height: 8px; }
+.splash__confetti i:nth-child(23) { left: 79%; animation-delay: 1.7s; }
+.splash__confetti i:nth-child(24) { left: 82%; animation-delay: 2.8s; width: 5px; height: 8px; }
+.splash__confetti i:nth-child(25) { left: 86%; animation-delay: 0.6s; }
+.splash__confetti i:nth-child(26) { left: 89%; animation-delay: 1.5s; width: 5px; height: 8px; }
+.splash__confetti i:nth-child(27) { left: 92%; animation-delay: 2.5s; }
+.splash__confetti i:nth-child(28) { left: 95%; animation-delay: 0.9s; width: 5px; height: 8px; }
+.splash__confetti i:nth-child(29) { left: 98%; animation-delay: 1.3s; }
+.splash__confetti i:nth-child(30) { left: 7%;  animation-delay: 2.9s; width: 5px; height: 8px; }
+
+/* Variación de caída y velocidad para dar profundidad */
+.splash__confetti i:nth-child(3n)  { animation-duration: 2.8s; }
+.splash__confetti i:nth-child(4n)  { animation-duration: 4.0s; }
+.splash__confetti i:nth-child(5n)  { animation-name: splashConfettiFallSway; }
+
+@keyframes splashConfettiFall {
+  0%   { opacity: 0; transform: translateY(0) translateX(0) rotate(0deg); }
+  8%   { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(108vh) translateX(4vw) rotate(540deg); }
+}
+
+@keyframes splashConfettiFallSway {
+  0%   { opacity: 0; transform: translateY(0) translateX(0) rotate(0deg); }
+  8%   { opacity: 1; }
+  40%  { transform: translateY(42vh) translateX(-3vw) rotate(220deg); }
+  85%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(108vh) translateX(3vw) rotate(560deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash__fiestas { animation-duration: 0.01s; opacity: 1; }
+  .splash__fiestas .mono,
+  .splash__fiestas-flag,
+  .splash__confetti i {
+    animation-duration: 0.01s;
+    animation-iteration-count: 1;
+  }
+}
+
 /* ============ NAVIGATION ============ */
 .nav {
   position: fixed;
@@ -610,6 +731,127 @@ p {
 @keyframes dotPulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.4; }
+}
+
+.hero__fiestas {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: -12px 0 26px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background:
+    linear-gradient(rgba(20, 5, 8, 0.85), rgba(20, 5, 8, 0.85)) padding-box,
+    linear-gradient(120deg, #d90429, #ffffff, #d90429, #ffffff, #d90429) border-box;
+  background-size: 100% 100%, 300% 100%;
+  border: 1.5px solid transparent;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  animation:
+    fadeUp 0.8s 0.45s var(--ease) forwards,
+    fiestasBorder 4s linear infinite,
+    fiestasGlow 2.6s ease-in-out infinite;
+  overflow: visible;
+}
+
+@keyframes fiestasBorder {
+  0%   { background-position: 0 0, 0% 50%; }
+  100% { background-position: 0 0, 300% 50%; }
+}
+
+@keyframes fiestasGlow {
+  0%, 100% { box-shadow: 0 0 14px rgba(217, 4, 41, 0.35), 0 0 30px rgba(217, 4, 41, 0.15); }
+  50%      { box-shadow: 0 0 22px rgba(217, 4, 41, 0.6), 0 0 46px rgba(217, 4, 41, 0.28); }
+}
+
+.hero__fiestas-text {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #f5d7db 0%, #ffffff 45%, #ff6b81 50%, #ffffff 55%, #f5d7db 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fiestasShine 3.5s linear infinite;
+}
+
+@keyframes fiestasShine {
+  0%   { background-position: 250% 0; }
+  100% { background-position: -250% 0; }
+}
+
+.hero__fiestas-flag {
+  font-size: 1.1rem;
+  line-height: 1;
+  transform-origin: bottom left;
+  animation: fiestasWave 1.8s ease-in-out infinite;
+}
+
+@keyframes fiestasWave {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(-12deg); }
+  60%      { transform: rotate(8deg); }
+}
+
+.hero__fiestas-party {
+  font-size: 1rem;
+  line-height: 1;
+  animation: fiestasParty 2.2s ease-in-out infinite;
+}
+
+@keyframes fiestasParty {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  40%      { transform: scale(1.25) rotate(-14deg); }
+  70%      { transform: scale(1.1) rotate(10deg); }
+}
+
+/* Confeti rojo y blanco flotando alrededor del badge */
+.hero__fiestas-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero__fiestas-confetti i {
+  position: absolute;
+  bottom: 20%;
+  width: 5px;
+  height: 8px;
+  border-radius: 1px;
+  opacity: 0;
+  animation: fiestasConfetti 3s ease-in infinite;
+}
+
+.hero__fiestas-confetti i:nth-child(odd)  { background: #d90429; }
+.hero__fiestas-confetti i:nth-child(even) { background: #ffffff; }
+
+.hero__fiestas-confetti i:nth-child(1) { left: 4%;  animation-delay: 0s;    }
+.hero__fiestas-confetti i:nth-child(2) { left: 18%; animation-delay: 0.9s;  width: 4px; height: 6px; }
+.hero__fiestas-confetti i:nth-child(3) { left: 32%; animation-delay: 1.7s;  }
+.hero__fiestas-confetti i:nth-child(4) { left: 47%; animation-delay: 0.4s;  width: 4px; height: 6px; }
+.hero__fiestas-confetti i:nth-child(5) { left: 61%; animation-delay: 2.2s;  }
+.hero__fiestas-confetti i:nth-child(6) { left: 74%; animation-delay: 1.2s;  width: 4px; height: 6px; }
+.hero__fiestas-confetti i:nth-child(7) { left: 86%; animation-delay: 2.7s;  }
+.hero__fiestas-confetti i:nth-child(8) { left: 95%; animation-delay: 0.6s;  width: 4px; height: 6px; }
+
+@keyframes fiestasConfetti {
+  0%   { opacity: 0; transform: translateY(0) rotate(0deg); }
+  12%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-46px) rotate(320deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__fiestas,
+  .hero__fiestas-text,
+  .hero__fiestas-flag,
+  .hero__fiestas-party,
+  .hero__fiestas-confetti i {
+    animation-duration: 0.01s;
+    animation-iteration-count: 1;
+  }
+  .hero__fiestas { opacity: 1; }
 }
 
 .hero__title {

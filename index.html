@@ -44,7 +44,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css?v=20260518" />
+  <link rel="stylesheet" href="css/styles.css?v=20260706d" />
 
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4W2KEQS5DL"></script>
@@ -64,9 +64,24 @@
 
   <!-- ============ SPLASH ============ -->
   <div class="splash" id="splash" aria-hidden="true">
+    <div class="splash__confetti" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
     <div class="splash__inner">
       <span class="splash__logo"><img src="img/logo.png" alt="" /></span>
       <div class="splash__line"></div>
+      <div class="splash__fiestas">
+        <span class="splash__fiestas-flag">🇵🇪</span>
+        <span class="mono">¡Felices Fiestas Patrias!</span>
+        <span class="splash__fiestas-flag splash__fiestas-flag--mirror">🇵🇪</span>
+      </div>
     </div>
   </div>
 
@@ -124,6 +139,15 @@
         <div class="hero__eyebrow">
           <span class="dot"></span>
           <span class="mono">MIRAFLORES · LIMA</span>
+        </div>
+
+        <div class="hero__fiestas" aria-label="Fiestas Patrias del Perú">
+          <span class="hero__fiestas-confetti" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </span>
+          <span class="hero__fiestas-flag" aria-hidden="true">🇵🇪</span>
+          <span class="hero__fiestas-text mono">¡Felices Fiestas Patrias! · Viva el Perú</span>
+          <span class="hero__fiestas-party" aria-hidden="true">🎉</span>
         </div>
 
         <h1 class="hero__title">
@@ -360,25 +384,25 @@
 
           <!-- PROMO 01 · edita aquí para cambiar contenido -->
           <article class="promo reveal">
-            <div class="promo__label mono">Promo · Junio 2026</div>
+            <div class="promo__label mono">PROMOCIÓN ESPECIAL – FIESTAS PATRIAS</div>
             <div class="promo__body">
-              <h3 class="promo__name">Amanecer conmigo</h3>
-              <p class="promo__desc">Una combinación de exfoliación corporal con café natural y una hora de masaje relajante para que sientas la energía que necesitas para continuar.
-                                     Una infusión o té súper recomendable en cada sesión</p>
+              <h3 class="promo__name">🇵🇪 Siente al Perú 🇵🇪</h3>
+              <p class="promo__desc">Celebra al Perú regalándote un descanso de lujo. * Exfoliación corporal * Masaje mixto premium * Facial Express * Toallas calientes * Aromaterapia * Bebida de cortesía</p>
               <div class="promo__pricing">
-                <span class="promo__original">S/. 180</span>
+                <span class="promo__original">S/. 250</span>
                 <svg class="promo__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                <span class="promo__price">S/. 130</span>
-                <span class="promo__save mono">Ahorras S/. 50</span>
+                <span class="promo__price">S/. 199</span>
+                <span class="promo__save mono">Ahorras S/. 51</span>
               </div>
               <ul class="promo__includes">
                 <li>20 min · Exfoliación corporal</li>
-                <li>60 min · Masaje relajante</li>
+                <li>50 min · Masaje mixto premium</li>
+                <li>20 min · Facial Express</li>
                 <li>Una infusión o té incluido</li>
               </ul>
               <div class="promo__footer">
                 <span class="mono promo__valid">Válido hasta el 31 de junio · Cupos limitados</span>
-                <a class="promo__cta" href="https://wa.me/51922014182?text=Hola%20Havana%2C%20quiero%20reservar%20la%20Oferta%20Amanecer%20conmigo%20(promo%20junio%20S%2F.130)" target="_blank" rel="noopener">Reservar ahora <span>→</span></a>
+                <a class="promo__cta" href="https://wa.me/51922014182?text=Hola%20Havana%2C%20quiero%20reservar%20la%20Oferta%20Amanecer%20conmigo%20(promo%20junio%20S%2F.199)" target="_blank" rel="noopener">Reservar ahora <span>→</span></a>
               </div>
             </div>
           </article>
