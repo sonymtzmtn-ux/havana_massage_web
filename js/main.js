@@ -22,6 +22,33 @@
     if (el) el.textContent = new Date().getFullYear();
   }
 
+  // ---------- Announcement toast ----------
+  function initAnnounceBar() {
+    const bar = $('#announceBar');
+    if (!bar) return;
+    const closeBtn = $('#announceClose', bar);
+
+    let dismissed = false;
+    try { dismissed = sessionStorage.getItem('hm_announce_dismissed_v2') === '1'; } catch (e) {}
+
+    if (dismissed) {
+      bar.classList.add('is-hidden');
+      return;
+    }
+
+    setTimeout(() => {
+      bar.classList.add('is-visible');
+    }, 4300);
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        bar.classList.remove('is-visible');
+        setTimeout(() => bar.classList.add('is-hidden'), 400);
+        try { sessionStorage.setItem('hm_announce_dismissed_v2', '1'); } catch (e) {}
+      });
+    }
+  }
+
   // ---------- Nav: scrolled state ----------
   function initNavScroll() {
     const nav = $('#nav');
@@ -701,6 +728,7 @@
   // ---------- Init all ----------
   function init() {
     safe(initYear, 'year');
+    safe(initAnnounceBar, 'announce-bar');
     safe(initNavScroll, 'nav-scroll');
     safe(initMobileMenu, 'mobile-menu');
     safe(initReveal, 'reveal');

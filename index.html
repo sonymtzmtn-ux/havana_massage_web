@@ -44,7 +44,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/styles.css?v=20260706d" />
+  <link rel="stylesheet" href="css/styles.css?v=20260706h" />
 
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4W2KEQS5DL"></script>
@@ -64,24 +64,24 @@
 
   <!-- ============ SPLASH ============ -->
   <div class="splash" id="splash" aria-hidden="true">
-    <div class="splash__confetti" aria-hidden="true">
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-    </div>
     <div class="splash__inner">
       <span class="splash__logo"><img src="img/logo.png" alt="" /></span>
       <div class="splash__line"></div>
-      <div class="splash__fiestas">
-        <span class="splash__fiestas-flag">🇵🇪</span>
-        <span class="mono">¡Felices Fiestas Patrias!</span>
-        <span class="splash__fiestas-flag splash__fiestas-flag--mirror">🇵🇪</span>
-      </div>
+    </div>
+  </div>
+
+  <!-- ============ AVISO IMPORTANTE (notificación) ============ -->
+  <div class="announce" id="announceBar" role="region" aria-label="Aviso importante">
+    <div class="announce__head">
+      <span class="announce__dot" aria-hidden="true"></span>
+      <span class="announce__eyebrow">Aviso importante</span>
+      <button class="announce__close" id="announceClose" aria-label="Cerrar aviso" type="button">×</button>
+    </div>
+    <p class="announce__text">
+      Atenderemos en el studio <strong>solo hasta el mes de agosto</strong> — buscamos un nuevo local para seguir ofreciéndote la mejor experiencia. Mientras tanto, <strong>reanudamos el servicio a domicilio</strong> (sujeto a nuevos servicios) hasta nuevo aviso.
+    </p>
+    <div class="announce__foot">
+      <a class="announce__cta" href="https://wa.me/51922014182?text=Hola%20Havana%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20cierre%20temporal%20del%20studio%20y%20el%20servicio%20a%20domicilio" target="_blank" rel="noopener">Consultar por WhatsApp</a>
     </div>
   </div>
 
@@ -139,15 +139,6 @@
         <div class="hero__eyebrow">
           <span class="dot"></span>
           <span class="mono">MIRAFLORES · LIMA</span>
-        </div>
-
-        <div class="hero__fiestas" aria-label="Fiestas Patrias del Perú">
-          <span class="hero__fiestas-confetti" aria-hidden="true">
-            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          </span>
-          <span class="hero__fiestas-flag" aria-hidden="true">🇵🇪</span>
-          <span class="hero__fiestas-text mono">¡Felices Fiestas Patrias! · Viva el Perú</span>
-          <span class="hero__fiestas-party" aria-hidden="true">🎉</span>
         </div>
 
         <h1 class="hero__title">
@@ -375,7 +366,7 @@
     <section class="promos" id="promos">
       <div class="container">
         <header class="section__head">
-          <span class="eyebrow"><span class="line-x"></span><span class="mono promo-eyebrow-live"><span class="promo-dot"></span>Promo del mes · Julio 2026</span></span>
+          <span class="eyebrow"><span class="line-x"></span><span class="mono promo-eyebrow-live"><span class="promo-dot"></span>Promo del mes · Agosto 2026</span></span>
           <h2 class="h2 reveal" data-split>Una oferta que <em>no se repite</em>.</h2>
           <p class="section__lede reveal">Este mes, una oferta pensada para sacarle más a tu visita. Cupos limitados — primero en reservar, primero en disfrutar.</p>
         </header>
@@ -384,25 +375,24 @@
 
           <!-- PROMO 01 · edita aquí para cambiar contenido -->
           <article class="promo reveal">
-            <div class="promo__label mono">PROMOCIÓN ESPECIAL – FIESTAS PATRIAS</div>
+            <div class="promo__label mono">PROMOCIÓN ESPECIAL</div>
             <div class="promo__body">
-              <h3 class="promo__name">🇵🇪 Siente al Perú 🇵🇪</h3>
-              <p class="promo__desc">Celebra al Perú regalándote un descanso de lujo. * Exfoliación corporal * Masaje mixto premium * Facial Express * Toallas calientes * Aromaterapia * Bebida de cortesía</p>
+              <h3 class="promo__name">Masaje Mixto de Agosto</h3>
+              <p class="promo__desc">Regálate un descanso de lujo. * Exfoliación corporal * Masaje en tejidos musculares profundos * </p>
               <div class="promo__pricing">
-                <span class="promo__original">S/. 250</span>
+                <span class="promo__original">S/. 135</span>
                 <svg class="promo__arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                <span class="promo__price">S/. 199</span>
-                <span class="promo__save mono">Ahorras S/. 51</span>
+                <span class="promo__price">S/. 100</span>
+                <span class="promo__save mono">Ahorras S/. 35</span>
               </div>
               <ul class="promo__includes">
                 <li>20 min · Exfoliación corporal</li>
-                <li>50 min · Masaje mixto premium</li>
-                <li>20 min · Facial Express</li>
+                <li>50 min · Masaje en tejidos musculares profundos</li>
                 <li>Una infusión o té incluido</li>
               </ul>
               <div class="promo__footer">
-                <span class="mono promo__valid">Válido hasta el 31 de julio · Cupos limitados</span>
-                <a class="promo__cta" href="https://wa.me/51922014182?text=Hola%20Havana%2C%20quiero%20reservar%20la%20promo%20Siente%20al%20Per%C3%BA%20(Fiestas%20Patrias%20S%2F.199)" target="_blank" rel="noopener">Reservar ahora <span>→</span></a>
+                <span class="mono promo__valid">Válido hasta el 31 de agosto · Cupos limitados</span>
+                <a class="promo__cta" href="https://wa.me/51922014182?text=Hola%20Havana%2C%20quiero%20reservar%20la%20promo%20Masaje%20Mixto%20(S%2F.199)" target="_blank" rel="noopener">Reservar ahora <span>→</span></a>
               </div>
             </div>
           </article>
@@ -469,7 +459,7 @@
                 </div>
               </article>
 
-              <article class="member" data-active="true">
+              <!-- <article class="member" data-active="true">
                 <div class="member__photo">
                   <img src="img/team/rei.png" alt="Reinier Dias" loading="lazy" />
                 </div>
@@ -553,7 +543,7 @@
                 </div>
               </article>
 
-              <!-- <article class="member" data-active="true">
+              <article class="member" data-active="true">
                 <div class="member__photo">
                   <img src="img/team/yasmani.png" alt="Yasmany Monte" loading="lazy" />
                 </div>
@@ -962,6 +952,6 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=20260518" defer></script>
+  <script src="js/main.js?v=20260706g" defer></script>
 </body>
 </html>
