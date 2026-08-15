@@ -1455,6 +1455,42 @@ p {
   border-radius: 100px;
 }
 
+.promo__pricing--tiers {
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.promo__tier {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.promo__tier-price {
+  font-family: var(--serif);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.promo__tier-duration {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(244, 234, 220, 0.55);
+}
+
+.promo__tier-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--line-soft);
+  flex-shrink: 0;
+}
+
 .promo__includes {
   list-style: none;
   display: flex;
